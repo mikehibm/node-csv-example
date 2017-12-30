@@ -1,0 +1,1 @@
+create table items (id int, name varchar(100), memo varchar(100));

@@ -1,0 +1,9 @@
+<h1>{{title}}</h1>
+<p>CSVファイルをアップロードしてください。</p>
+
+<form method="post" action="/upload" enctype="multipart/form-data">
+  <input type="file" name="file" accept='text/csv'>
+  <p>
+    <input type="submit">
+  </p>
+</form>
