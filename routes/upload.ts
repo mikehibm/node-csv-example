@@ -8,13 +8,23 @@ import db from "../database";
 
 const storage = multer.memoryStorage();
 
+// Filter for CSV file
+const csvFilter = (req: any, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+  if (!file.mimetype.includes("csv")) {
+    cb(new Error("Invalid file type."));
+    return;
+  }
+  cb(null, true);
+};
 const upload = multer({
-  storage,
+  storage: storage,
+  fileFilter: csvFilter,
   limits: {
     files: 1, // 複数ファイルのアップロードは不可。
     fileSize: 1024 * 1024 * 20, // 最大20MBまで許可。
   },
 });
+
 
 router.post("/", upload.single("file"), function (req, res) {
   if (!req.file) return;
